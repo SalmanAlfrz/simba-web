@@ -1,5 +1,6 @@
 import React from "react";
 import background from "../Images/SignIn.svg";
+import {ViewIcon, ViewOffIcon} from '@chakra-ui/icons'
 import { Flex, Spacer, Center, Square, Text, Box,Stack, Input,InputGroup,InputRightElement, Button, ButtonGroup, Link } from '@chakra-ui/react'
 interface SignInProps{
 
@@ -33,8 +34,8 @@ export default function SignIn(){
                             placeholder='Enter your password'
                         />
                         <InputRightElement width='4.5rem'>
-                            <Button h='1.75rem' size='sm' onClick={handleClick}>
-                            {show ? 'Tutup' : 'Tampil'}
+                            <Button mt={5} size='sm' onClick={handleClick}>
+                            {show ?<ViewIcon/> : <ViewOffIcon/>}
                             </Button>
                         </InputRightElement>
                     </InputGroup>

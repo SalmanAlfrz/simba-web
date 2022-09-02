@@ -1,8 +1,8 @@
 import React from "react";
 import background from "../Images/logo.svg";
 import icon_home from "../Images/icon_home.svg";
-import icon_students_active from "../Images/icon_students_active.svg";
-import icon_subjects from "../Images/icon_subjects.svg";
+import icon_students from "../Images/icon_students.svg";
+import icon_subjects_active from "../Images/icon_subjects_active.svg";
 import icon_teachers from "../Images/icon_teachers.svg";
 import icon_parents from "../Images/icon_parents.svg";
 import {
@@ -20,6 +20,7 @@ import {
     Flex,
     Spacer,Input, Select
   } from '@chakra-ui/react';
+  
   import {
     Table,
     Thead,
@@ -31,11 +32,12 @@ import {
     TableCaption,
     TableContainer,
   } from '@chakra-ui/react'
+  
+import { AddIcon } from '@chakra-ui/icons'
   import { Link} from 'react-router-dom';
 import { ChevronDownIcon } from '@chakra-ui/icons'
-import { AddIcon } from '@chakra-ui/icons'
-interface DetailStudentProps{}
-export default function DetailStudent(){
+interface KegiatanProps{}
+export default function Kegiatan(){
     return (
         <Grid
             templateAreas={`"nav header"
@@ -68,8 +70,8 @@ export default function DetailStudent(){
                 <Stack spacing={1} mt={10}>
                     <img src={background} style={{height:'100px',marginBottom:'80px'}}/>
                     <Link to='/dashboard'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_home} width={21} height={21} alt="" /><Text fontSize='lg' pl={3}><b>Dashboard</b></Text></Button></Link>
-                    <Link to='/murid'><Button justifyContent="flex-start" backgroundColor="#EDECF8" color="#6867AC" w={180} style={{height:'50px'}}><img src={icon_students_active} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Murid</b></Text></Button></Link>
-                    <Link to='/kegiatan'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_subjects} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Kegiatan</b></Text></Button></Link>
+                    <Link to='/murid'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_students} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Murid</b></Text></Button></Link>
+                    <Link to='/kegiatan'><Button justifyContent="flex-start" backgroundColor="#EDECF8" color="#6867AC" w={180} style={{height:'50px'}}><img src={icon_subjects_active} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Kegiatan</b></Text></Button></Link>
                     <Link to='/guru'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_teachers} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Guru</b></Text></Button></Link>
                     <Link to='/orang-tua'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_parents} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Orang Tua</b></Text></Button></Link>
                 </Stack>
@@ -78,66 +80,53 @@ export default function DetailStudent(){
             <GridItem pr={4} pb={10} area={'main'}>
                 <Box borderWidth='1px' backgroundColor="#F4F4FB" borderRadius='xl' p={10}>
                 <Center>
-                <Stack spacing={4} mt={8}>
-                    <Flex>
-                        <Avatar size='2xl' name='Nassya Putri Riyani' src='../Images/murid.PNG' />
-                        <Stack pl={5} pt={8}>
-                            <Text fontSize='2xl' color={"#464E56"}><b>Nassya Putri Riyani</b></Text>
-                            <Text fontSize='lg' color={"#464E56"}>3 Years</Text>
-                        </Stack>
-                        <Spacer />
-                        <Button  mt={8} mr={5} backgroundColor="#6867AC" color={'white'} h={33} w={150}>Semester 1</Button>
-                        <Button  mt={8} backgroundColor="white" color={'#6867AC'} h={33} w={150} variant='outline'>Semester 2</Button>
+                <Stack spacing={4}>
+                    <Text fontSize='xl' mb="-25px" color={"#464E56"}><b>Kegiatan Montessori</b></Text>
+                    <Flex color='white'>
+                        <Center pr={23}>
+                        <Input h={55} w={300} color={"#6D7878"} backgroundColor="#FFFFFF"
+                        // value={value}
+                        // onChange={handleChange}
+                        placeholder='Masukkan Nama Kegiatan...'
+                        size='lg'
+                        style={{marginBottom:'10px'}}/>
+                        </Center>
+                        <Center h={123} pb={2.5}>
+                            <Button backgroundColor="#6867AC" h={54} w={150}>Cari Kegiatan</Button>
+                        </Center>
                     </Flex>
-                    <Stack spacing={20} pt={5}>
-                        <Box borderWidth='1px' backgroundColor="white" borderRadius='xl' h={490} w={972}>
-                        </Box>
-                        <Box borderWidth='1px' backgroundColor="white" borderRadius='xl' h={490}>
+                    
+                    <Box borderWidth='1px' backgroundColor="white" borderRadius='xl' h={490} w={1080}>
                         <Flex p={5}>
-                            <Text fontSize='xl' color={"#464E56"}><b>Grades Report</b></Text>
+                            <Text fontSize='xl' color={"#464E56"}><b>4 Kegiatan Terdaftar</b></Text>
                             <Spacer />
-                            <Link to='/add-nilai'><Button backgroundColor="white" color={'black'} h={33} w={150} variant='outline'>Add Grades <AddIcon ml={2}/></Button></Link>
+                            <Link to='/add-kegiatan'><Button backgroundColor="white" color={'black'} h={33} variant='outline'>Tambah Kegiatan <AddIcon ml={2} w={3} mt={0.5}/></Button></Link>
                         </Flex>
                         <TableContainer>
                             <Table variant='striped'>
                                 <Thead>
                                 <Tr>
-                                    <Th>Week</Th>
-                                    <Th>Grade</Th>
-                                    <Th>Descriptions</Th>
-                                    <Th>Actions</Th>
+                                    <Th>No</Th>
+                                    <Th>Semester</Th>
+                                    <Th>Kegiatan Montessori</Th>
+                                    <Th>Deskripsi</Th>
+                                    <Th>Tanggal Kegiatan</Th>
+                                    <Th>Aksi</Th>
                                 </Tr>
                                 </Thead>
                                 <Tbody>
                                 <Tr>
                                     <Td>1</Td>
-                                    <Td>3</Td>
-                                    <Td >Berkembang Sesuai Harapan</Td>
-                                    <Td></Td>
-                                </Tr>
-                                <Tr>
-                                    <Td>2</Td>
-                                    <Td>2</Td>
-                                    <Td >Masih Berkembang</Td>
-                                    <Td></Td>
-                                </Tr>
-                                <Tr>
-                                    <Td>3</Td>
                                     <Td>1</Td>
-                                    <Td >Belum Berkembang</Td>
-                                    <Td></Td>
-                                </Tr>
-                                <Tr>
-                                    <Td>4</Td>
-                                    <Td>4</Td>
-                                    <Td >Berkembang Sangat Baik</Td>
+                                    <Td>Phonic Song</Td>
+                                    <Td>Belajar Alfabet dengan bernyanyi</Td>
+                                    <Td >17/08/2022</Td>
                                     <Td></Td>
                                 </Tr>
                                 </Tbody>
                             </Table>
                         </TableContainer>
                         </Box>
-                    </Stack>
                 </Stack>
                 </Center>
                 </Box>

@@ -7,6 +7,7 @@ import Main from "./Main"
 
 export const App = () => (
   <ChakraProvider theme={theme}>
+  
   <Main />
   </ChakraProvider>
 )

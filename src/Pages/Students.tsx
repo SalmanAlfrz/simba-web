@@ -55,12 +55,11 @@ export default function Students(){
             <Center>
                 <Stack spacing={1} mt={10}>
                     <img src={background} style={{height:'100px',marginBottom:'80px'}}/>
-                    <Button backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_home} alt=""  color="#6867AC"/><Text fontSize='lg' pl={3} ><b><Link to='/'>Dashboard</Link></b></Text></Button>
-                    <Button backgroundColor="#EDECF8" color="#6867AC" w={180} style={{height:'50px'}}><img src={icon_students_active} alt="" /><Text fontSize='lg' pl={3} color="#6867AC"><b><Link to='/students'>Students</Link></b></Text></Button>
-                    <Button backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_subjects} alt="" /><Text fontSize='lg' pl={3} ><b>Subjects</b></Text></Button>
-                    <Button backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_teachers} alt="" /><Text fontSize='lg' pl={3} ><b>Teachers</b></Text></Button>
-                    <Button backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_parents} alt="" /><Text fontSize='lg' pl={3} ><b>Parents</b></Text></Button>
-                    
+                    <Link to='/dashboard'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_home} width={21} height={21} alt="" /><Text fontSize='lg' pl={3}><b>Dashboard</b></Text></Button></Link>
+                    <Link to='/murid'><Button justifyContent="flex-start" backgroundColor="#EDECF8" color="#6867AC" w={180} style={{height:'50px'}}><img src={icon_students_active} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Murid</b></Text></Button></Link>
+                    <Link to='/kegiatan'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_subjects} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Kegiatan</b></Text></Button></Link>
+                    <Link to='/guru'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_teachers} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Guru</b></Text></Button></Link>
+                    <Link to='/orang-tua'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_parents}width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Orang Tua</b></Text></Button></Link>
                 </Stack>
             </Center>
             </GridItem>
@@ -105,7 +104,71 @@ export default function Students(){
                                     <Text fontSize='lg' color={"#464E56"}>3 Years</Text>
                                 </Center>
                                 <Center>
-                                    <Button backgroundColor="#6867AC" color={'white'} h={54} w={150}><Link to='/students/detail'>Details</Link></Button>
+                                <Link to='/murid/detail'><Button backgroundColor="#6867AC" color={'white'} h={54} w={150}>Details</Button></Link>
+                                </Center>
+                            </Stack>
+                        </Box>
+                        <Box borderWidth='1px' backgroundColor="white" borderRadius='xl' h={358} w={290}>
+                            <Stack spacing={2} mt={10}>
+                                <Center>
+                                    <Avatar size='2xl' name='Nassya Putri R' src='' />
+                                </Center>
+                                <Center pt={5}>
+                                    <Text fontSize='lg' color={"#464E56"}><b>Nassya Putri R</b></Text>
+                                </Center>
+                                <Center>
+                                    <Text fontSize='lg' color={"#464E56"}>3 Years</Text>
+                                </Center>
+                                <Center>
+                                <Link to='/murid/detail'><Button backgroundColor="#6867AC" color={'white'} h={54} w={150}>Details</Button></Link>
+                                </Center>
+                            </Stack>
+                        </Box>
+                        <Box borderWidth='1px' backgroundColor="white" borderRadius='xl' h={358} w={290}>
+                            <Stack spacing={2} mt={10}>
+                                <Center>
+                                    <Avatar size='2xl' name='Nassya Putri R' src='' />
+                                </Center>
+                                <Center pt={5}>
+                                    <Text fontSize='lg' color={"#464E56"}><b>Nassya Putri R</b></Text>
+                                </Center>
+                                <Center>
+                                    <Text fontSize='lg' color={"#464E56"}>3 Years</Text>
+                                </Center>
+                                <Center>
+                                <Link to='/murid/detail'><Button backgroundColor="#6867AC" color={'white'} h={54} w={150}>Details</Button></Link>
+                                </Center>
+                            </Stack>
+                        </Box>
+                        <Box borderWidth='1px' backgroundColor="white" borderRadius='xl' h={358} w={290}>
+                            <Stack spacing={2} mt={10}>
+                                <Center>
+                                    <Avatar size='2xl' name='Nassya Putri R' src='' />
+                                </Center>
+                                <Center pt={5}>
+                                    <Text fontSize='lg' color={"#464E56"}><b>Nassya Putri R</b></Text>
+                                </Center>
+                                <Center>
+                                    <Text fontSize='lg' color={"#464E56"}>3 Years</Text>
+                                </Center>
+                                <Center>
+                                <Link to='/murid/detail'><Button backgroundColor="#6867AC" color={'white'} h={54} w={150}>Details</Button></Link>
+                                </Center>
+                            </Stack>
+                        </Box>
+                        <Box borderWidth='1px' backgroundColor="white" borderRadius='xl' h={358} w={290}>
+                            <Stack spacing={2} mt={10}>
+                                <Center>
+                                    <Avatar size='2xl' name='Nassya Putri R' src='' />
+                                </Center>
+                                <Center pt={5}>
+                                    <Text fontSize='lg' color={"#464E56"}><b>Nassya Putri R</b></Text>
+                                </Center>
+                                <Center>
+                                    <Text fontSize='lg' color={"#464E56"}>3 Years</Text>
+                                </Center>
+                                <Center>
+                                <Link to='/murid/detail'><Button backgroundColor="#6867AC" color={'white'} h={54} w={150}>Details</Button></Link>
                                 </Center>
                             </Stack>
                         </Box>

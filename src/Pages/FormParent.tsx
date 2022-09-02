@@ -1,10 +1,10 @@
 import React from "react";
 import background from "../Images/logo.svg";
 import icon_home from "../Images/icon_home.svg";
-import icon_students_active from "../Images/icon_students_active.svg";
+import icon_students from "../Images/icon_students.svg";
 import icon_subjects from "../Images/icon_subjects.svg";
 import icon_teachers from "../Images/icon_teachers.svg";
-import icon_parents from "../Images/icon_parents.svg";
+import icon_parents_active from "../Images/icon_parents_active.svg";
 import {
     Grid,
     GridItem,
@@ -23,8 +23,8 @@ import {
   import { Link} from 'react-router-dom';
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { AddIcon } from '@chakra-ui/icons'
-interface FormGradeProps{}
-export default function FormGrade(){
+interface FormParentProps{}
+export default function FormParent(){
     return (
         <Grid
             templateAreas={`"nav header"
@@ -57,10 +57,10 @@ export default function FormGrade(){
                 <Stack spacing={1} mt={10}>
                     <img src={background} style={{height:'100px',marginBottom:'80px'}}/>
                     <Link to='/dashboard'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_home} width={21} height={21} alt="" /><Text fontSize='lg' pl={3}><b>Dashboard</b></Text></Button></Link>
-                    <Link to='/murid'><Button justifyContent="flex-start" backgroundColor="#EDECF8" color="#6867AC" w={180} style={{height:'50px'}}><img src={icon_students_active} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Murid</b></Text></Button></Link>
+                    <Link to='/murid'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_students} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Murid</b></Text></Button></Link>
                     <Link to='/kegiatan'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_subjects} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Kegiatan</b></Text></Button></Link>
                     <Link to='/guru'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_teachers} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Guru</b></Text></Button></Link>
-                    <Link to='/orang-tua'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_parents} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Orang Tua</b></Text></Button></Link>
+                    <Link to='/orang-tua'><Button justifyContent="flex-start" backgroundColor="#EDECF8" color="#6867AC" w={180} style={{height:'50px'}}><img src={icon_parents_active} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Orang Tua</b></Text></Button></Link>
                 </Stack>
             </Center>
             </GridItem>
@@ -68,29 +68,42 @@ export default function FormGrade(){
                 <Box borderWidth='1px' backgroundColor="#F4F4FB" borderRadius='xl' p={10}>
                 <Center>
                 <Stack spacing={5} mt={8}>
-                    <Text fontSize='2xl' mb="-25px" color={"#464E56"}><b>Students</b></Text>
-                    <Text fontSize='lg' pt={10}>Nama</Text>
+                    <Text fontSize='2xl' mb="-25px" color={"#464E56"}><b>Form Tambah Orang Tua</b></Text>
+                    <Text fontSize='lg' pt={10}>Nama Orang Tua</Text>
                     <Input h={67} w={1080} backgroundColor={"#ffffff"} color={"#6D7878"}
                         // value={value}
                         // onChange={handleChange}
-                        placeholder='Masukkan Nama Murid'
+                        placeholder='Masukkan nama orang tua...'
                         size='lg'
                         style={{marginBottom:'10px'}}/>
-                    <Text fontSize='lg' pt={5}>Jenis Kegiatan Montessori</Text>
-                    <Select placeholder='Pilih Jenis Kegiatan Montessori' h={67} w={1080} backgroundColor={"#ffffff"} color={"#6D7878"}>
-                        <option value='option1'>Option 1</option>
-                        <option value='option2'>Option 2</option>
-                        <option value='option3'>Option 3</option>
+                    <Text fontSize='lg' pt={5}>Nama Anak</Text>
+                    <Select placeholder='Pilih anak' h={67} w={1080} backgroundColor={"#ffffff"} color={"#6D7878"}>
+                        <option value='option1'>Semester 1</option>
+                        <option value='option2'>Semester 2</option>
                     </Select>
-                    <Text fontSize='lg' pt={5}>Nilai</Text>
+                    <Text fontSize='lg' pt={5}>Nomor Telepon</Text>
                     <Input h={67} w={1080} backgroundColor={"#ffffff"} color={"#6D7878"}
                         // value={value}
                         // onChange={handleChange}
-                        placeholder='Masukkan nilai kegiatan...'
+                        placeholder='Masukkan nomor telepon...'
                         size='lg'
                         style={{marginBottom:'10px'}}/>
-                    <Text fontSize='lg' pt={5}>Deskripsi</Text>
-                    <Textarea placeholder='Masukan deskripsi nilai kegiatan...' backgroundColor={"#ffffff"} color={"#6D7878"} h={150}/>
+                    <Text fontSize='2xl' mb="-25px" mt={5} color={"#464E56"}><b>Credential</b></Text>
+                    <Text fontSize='lg' pt={5}>Email</Text>
+                    <Input h={67} w={1080} backgroundColor={"#ffffff"} color={"#6D7878"}
+                        // value={value}
+                        // onChange={handleChange}
+                        placeholder='Masukkan email...'
+                        size='lg'
+                        style={{marginBottom:'10px'}}/>
+                    <Text fontSize='lg' pt={5}>Kata Sandi</Text>
+                    <Input h={67} w={1080} mb={10} backgroundColor={"#ffffff"} color={"#6D7878"}
+                        // value={value}
+                        // onChange={handleChange}
+                        placeholder='Masukkan kata sandi...'
+                        size='lg'
+                        style={{marginBottom:'10px'}}/>
+                        
                         <Button marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" height={67} width={1080}>Simpan</Button>
                 </Stack>
                 </Center>

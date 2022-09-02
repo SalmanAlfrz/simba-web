@@ -53,14 +53,13 @@ export default function Dashboard(){
             </GridItem>
             <GridItem w={300} area={'nav'}>
             <Center>
-                <Stack spacing={1} mt={10}>
+                <Stack spacing={1} mt={10} float='right'>
                     <img src={background} style={{height:'100px',marginBottom:'80px'}}/>
-                    <Button backgroundColor="#EDECF8" color="#6867AC" w={180} style={{height:'50px'}}><img src={icon_home_active} alt="" /><Text fontSize='lg' pl={3} color={"#6867AC"} ><b><Link to='/'>Dashboard</Link></b></Text></Button>
-                    <Button backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_students} alt="" /><Text fontSize='lg' pl={3} ><b><Link to='/students'>Students</Link></b></Text></Button>
-                    <Button backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_subjects} alt="" /><Text fontSize='lg' pl={3} ><b>Subjects</b></Text></Button>
-                    <Button backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_teachers} alt="" /><Text fontSize='lg' pl={3} ><b>Teachers</b></Text></Button>
-                    <Button backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_parents} alt="" /><Text fontSize='lg' pl={3} ><b>Parents</b></Text></Button>
-                    
+                    <Link to='dashboard'><Button justifyContent="flex-start" backgroundColor="#EDECF8" color="#6867AC" w={180} style={{height:'50px'}}><img src={icon_home_active} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Dashboard</b></Text></Button></Link>
+                    <Link to='/murid'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_students} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Murid</b></Text></Button></Link>
+                    <Link to='/kegiatan'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_subjects} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Kegiatan</b></Text></Button></Link>
+                    <Link to='/guru'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_teachers} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Guru</b></Text></Button></Link>
+                    <Link to='/orang-tua'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_parents} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Orang Tua</b></Text></Button></Link>
                 </Stack>
             </Center>
             </GridItem>
