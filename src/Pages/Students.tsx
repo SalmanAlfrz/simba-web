@@ -1,182 +1,73 @@
-import React from "react";
-import background from "../Images/logo.svg";
-import icon_home from "../Images/icon_home.svg";
-import icon_students_active from "../Images/icon_students_active.svg";
-import icon_subjects from "../Images/icon_subjects.svg";
-import icon_teachers from "../Images/icon_teachers.svg";
-import icon_parents from "../Images/icon_parents.svg";
-import {
-    Grid,
-    GridItem,
-    Box,
-    Stack,
-    Button,
-    HStack,
-    Text,
-    Center,Avatar, WrapItem, Wrap, Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    Flex,
-    Spacer,Input, Select
-  } from '@chakra-ui/react';
-  import { Link} from 'react-router-dom';
-import { ChevronDownIcon } from '@chakra-ui/icons'
-interface StudentsProps{}
+import React, { useEffect, useState } from 'react'
+import {Box, Stack, Button,Text, Center, Select, Input, Grid, Flex, Avatar, Menu} from '@chakra-ui/react';
+import { Link} from 'react-router-dom';
+import { getCookie } from 'typescript-cookie';
+import axios from "../Api/axios";
+import { render } from '@testing-library/react';
 export default function Students(){
+    const [murid, setMurid] = useState([{
+        id:'',
+        name:'',
+        birthDate:''
+    }])
+    const token = getCookie('token')
+    useEffect(() => {
+        //get dashboard
+        axios.get('students', {
+          headers: {
+            'x-access-token': 'api-key',
+            'Authorization': `token ${token}`
+          }
+        })
+        .then((res) => {
+            let data = res.data.data
+            setMurid(data)
+        })
+      },[])
+      console.log(murid)
     return (
-        <Grid
-            templateAreas={`"nav header"
-                            "nav main"
-                            "nav footer"`}
-            gridTemplateRows={'90px 1fr'}
-            gridTemplateColumns={'300px 1fr'}
-            // color='#464E56'
-            // fontWeight='bold'
-            >
-            <GridItem style={{textAlign:"end"}} mr={4} mt={4} pl='2' area={'header'}>
-            <Menu>
-                <MenuButton h={51} as={Button} background="white" rightIcon={<ChevronDownIcon />}>
-                <HStack spacing='0'>
-                <Wrap mr={3}>
-                    <WrapItem>
-                        <Avatar size='md' name='Salman Alfarizi' src='' />
-                    </WrapItem>
-                </Wrap>
-                <Text fontSize='lg' color={"#464E56"}>Salman Alfarizi</Text>
-                </HStack>
-                </MenuButton>
-                <MenuList>
-                    <MenuItem>Log Out</MenuItem>
-                </MenuList>
-                </Menu>
-            </GridItem>
-            <GridItem w={300} area={'nav'}>
-            <Center>
-                <Stack spacing={1} mt={10}>
-                    <img src={background} style={{height:'100px',marginBottom:'80px'}}/>
-                    <Link to='/dashboard'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_home} width={21} height={21} alt="" /><Text fontSize='lg' pl={3}><b>Dashboard</b></Text></Button></Link>
-                    <Link to='/murid'><Button justifyContent="flex-start" backgroundColor="#EDECF8" color="#6867AC" w={180} style={{height:'50px'}}><img src={icon_students_active} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Murid</b></Text></Button></Link>
-                    <Link to='/kegiatan'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_subjects} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Kegiatan</b></Text></Button></Link>
-                    <Link to='/guru'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_teachers} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Guru</b></Text></Button></Link>
-                    <Link to='/orang-tua'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_parents}width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Orang Tua</b></Text></Button></Link>
-                </Stack>
-            </Center>
-            </GridItem>
-            <GridItem pr={4} pb={10} area={'main'}>
-                <Box borderWidth='1px' backgroundColor="#F4F4FB" borderRadius='xl' p={10}>
-                <Center>
-                <Stack spacing={4} mt={8}>
-                    <Text fontSize='2xl' mb="-25px" color={"#464E56"}><b>Students</b></Text>
-                    <Flex color='white'>
-                        <Center pr={23}>
-                        <Input h={55} w={300} color={"#6D7878"} backgroundColor="#FFFFFF"
-                        // value={value}
-                        // onChange={handleChange}
-                        placeholder='Enter your email'
-                        size='lg'
-                        style={{marginBottom:'10px'}}/>
-                        </Center>
-                        <Center pr={23} pb={2.5}>
-                        <Select placeholder='Select option' h={55} w={300} color={"#6D7878"} backgroundColor="#FFFFFF">
-                            <option value='option1'>Option 1</option>
-                            <option value='option2'>Option 2</option>
-                            <option value='option3'>Option 3</option>
-                        </Select>
-                        </Center>
-                        <Center h={123} pb={2.5}>
-                            <Button backgroundColor="#6867AC" h={54} w={150}>Search</Button>
-                        </Center>
-                    </Flex>
-                    <Flex pt={5}>
-                        <Text fontSize='2xl' color={"#464E56"}><b>24 Students Available</b></Text>
-                    </Flex>
-                    <Grid templateColumns='repeat(3, 1fr)' gap={20}>
-                        <Box borderWidth='1px' backgroundColor="white" borderRadius='xl' h={358} w={290}>
-                            <Stack spacing={2} mt={10}>
-                                <Center>
-                                    <Avatar size='2xl' name='Nassya Putri R' src='' />
-                                </Center>
-                                <Center pt={5}>
-                                    <Text fontSize='lg' color={"#464E56"}><b>Nassya Putri R</b></Text>
-                                </Center>
-                                <Center>
-                                    <Text fontSize='lg' color={"#464E56"}>3 Years</Text>
-                                </Center>
-                                <Center>
-                                <Link to='/murid/detail'><Button backgroundColor="#6867AC" color={'white'} h={54} w={150}>Details</Button></Link>
-                                </Center>
-                            </Stack>
-                        </Box>
-                        <Box borderWidth='1px' backgroundColor="white" borderRadius='xl' h={358} w={290}>
-                            <Stack spacing={2} mt={10}>
-                                <Center>
-                                    <Avatar size='2xl' name='Nassya Putri R' src='' />
-                                </Center>
-                                <Center pt={5}>
-                                    <Text fontSize='lg' color={"#464E56"}><b>Nassya Putri R</b></Text>
-                                </Center>
-                                <Center>
-                                    <Text fontSize='lg' color={"#464E56"}>3 Years</Text>
-                                </Center>
-                                <Center>
-                                <Link to='/murid/detail'><Button backgroundColor="#6867AC" color={'white'} h={54} w={150}>Details</Button></Link>
-                                </Center>
-                            </Stack>
-                        </Box>
-                        <Box borderWidth='1px' backgroundColor="white" borderRadius='xl' h={358} w={290}>
-                            <Stack spacing={2} mt={10}>
-                                <Center>
-                                    <Avatar size='2xl' name='Nassya Putri R' src='' />
-                                </Center>
-                                <Center pt={5}>
-                                    <Text fontSize='lg' color={"#464E56"}><b>Nassya Putri R</b></Text>
-                                </Center>
-                                <Center>
-                                    <Text fontSize='lg' color={"#464E56"}>3 Years</Text>
-                                </Center>
-                                <Center>
-                                <Link to='/murid/detail'><Button backgroundColor="#6867AC" color={'white'} h={54} w={150}>Details</Button></Link>
-                                </Center>
-                            </Stack>
-                        </Box>
-                        <Box borderWidth='1px' backgroundColor="white" borderRadius='xl' h={358} w={290}>
-                            <Stack spacing={2} mt={10}>
-                                <Center>
-                                    <Avatar size='2xl' name='Nassya Putri R' src='' />
-                                </Center>
-                                <Center pt={5}>
-                                    <Text fontSize='lg' color={"#464E56"}><b>Nassya Putri R</b></Text>
-                                </Center>
-                                <Center>
-                                    <Text fontSize='lg' color={"#464E56"}>3 Years</Text>
-                                </Center>
-                                <Center>
-                                <Link to='/murid/detail'><Button backgroundColor="#6867AC" color={'white'} h={54} w={150}>Details</Button></Link>
-                                </Center>
-                            </Stack>
-                        </Box>
-                        <Box borderWidth='1px' backgroundColor="white" borderRadius='xl' h={358} w={290}>
-                            <Stack spacing={2} mt={10}>
-                                <Center>
-                                    <Avatar size='2xl' name='Nassya Putri R' src='' />
-                                </Center>
-                                <Center pt={5}>
-                                    <Text fontSize='lg' color={"#464E56"}><b>Nassya Putri R</b></Text>
-                                </Center>
-                                <Center>
-                                    <Text fontSize='lg' color={"#464E56"}>3 Years</Text>
-                                </Center>
-                                <Center>
-                                <Link to='/murid/detail'><Button backgroundColor="#6867AC" color={'white'} h={54} w={150}>Details</Button></Link>
-                                </Center>
-                            </Stack>
-                        </Box>
-                    </Grid>
-                </Stack>
+        <Stack spacing={4}>
+            <Text fontSize='2xl' mb="-25px" color={"#464E56"}><b>Murid</b></Text>
+            <Flex color='white'>
+                <Center pr={23}>
+                <Input h={55} w={300} color={"#6D7878"} backgroundColor="#FFFFFF"
+                // value={value}
+                // onChange={handleChange}
+                placeholder='Masukkan nama murid...'
+                size='lg'
+                style={{marginBottom:'10px'}}/>
                 </Center>
-                </Box>
-            </GridItem>
-        </Grid>
+                <Center h={123} pb={2.5}>
+                    <Button backgroundColor="#6867AC" h={54} w={150}>Cari Murid</Button>
+                </Center>
+            </Flex>
+            <Flex pt={5}>
+                <Text fontSize='2xl' color={"#464E56"}><b>{murid.length} Students Available</b></Text>
+            </Flex>
+            <Grid templateColumns='repeat(3, 1fr)' gap={20}>
+                {
+                    murid.map((data)=>{
+                        return(
+                            <Box borderWidth='1px' backgroundColor="white" borderRadius='xl' h={358} w={290}>
+                                <Stack spacing={2} mt={10}>
+                                    <Center>
+                                        <Avatar size='2xl' name={data.name} src='' />
+                                    </Center>
+                                    <Center pt={5}>
+                                        <Text fontSize='lg' color={"#464E56"}><b>{data.name}</b></Text>
+                                    </Center>
+                                    <Center>
+                                        <Text fontSize='lg' color={"#464E56"}>3 Years</Text>
+                                    </Center>
+                                    <Center>
+                                        <Link to='/murid/detail'><Button backgroundColor="#6867AC" color={'white'} h={54} w={150}>Details</Button></Link>
+                                    </Center>
+                                </Stack>
+                            </Box>
+                        )
+                    })
+                }
+            </Grid>
+        </Stack>
     )
 }

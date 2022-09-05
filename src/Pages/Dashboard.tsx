@@ -1,118 +1,119 @@
-import React from "react";
-import background from "../Images/logo.svg";
-import icon_home_active from "../Images/icon_home_active.svg";
-import icon_students from "../Images/icon_students.svg";
-import icon_subjects from "../Images/icon_subjects.svg";
-import icon_teachers from "../Images/icon_teachers.svg";
-import icon_parents from "../Images/icon_parents.svg";
-import {
-    Grid,
-    GridItem,
-    Box,
-    Stack,
-    Button,
-    HStack,
-    Text,
-    Center,Avatar, WrapItem, Wrap, Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    Flex,
-    Spacer,
-  } from '@chakra-ui/react';
-  import { Link} from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import {Box, Stack, Button,Text, Center, MenuButton, MenuList, MenuItem, Flex, Spacer, Menu} from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
-interface DashboardProps{}
+import { getCookie } from 'typescript-cookie';
+import axios from "../Api/axios";
+import {
+    Chart as ChartJS,
+    LinearScale,
+    PointElement,
+    Tooltip,
+    Legend,
+  } from 'chart.js';
+import { Bubble } from 'react-chartjs-2';
+import { faker } from '@faker-js/faker';
+
+ChartJS.register(LinearScale, PointElement, Tooltip, Legend);  
 export default function Dashboard(){
+    const [murid, setMurid] = useState()
+    const [kegiatan, setKegiatan] = useState()
+    const [guru, setGuru] = useState()
+    const [parents, setparents] = useState()
+    const token = getCookie('token')
+    useEffect(() => {
+        //get dashboard
+        axios.get('dashboard', {
+          headers: {
+            'x-access-token': 'api-key',
+            'Authorization': `token ${token}`
+          }
+        })
+        .then((res) => {
+            setMurid(res.data.data.count_student);
+            setKegiatan(res.data.data.count_activity);
+            setGuru(res.data.data.count_teacher);
+            setparents(res.data.data.count_parent);
+        })
+      },[])
+
+    const options = {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      };
+      
+    const data = {
+        datasets: [
+          {
+            label: 'Red dataset',
+            data: Array.from({ length: 50 }, () => ({
+              x: faker.datatype.number({ min: -100, max: 100 }),
+              y: faker.datatype.number({ min: -100, max: 100 }),
+              r: faker.datatype.number({ min: 5, max: 20 }),
+            })),
+            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+          },
+          {
+            label: 'Blue dataset',
+            data: Array.from({ length: 50 }, () => ({
+              x: faker.datatype.number({ min: -100, max: 100 }),
+              y: faker.datatype.number({ min: -100, max: 100 }),
+              r: faker.datatype.number({ min: 5, max: 20 }),
+            })),
+            backgroundColor: 'rgba(53, 162, 235, 0.5)',
+          },
+        ],
+      };
+
     return (
-        <Grid
-            templateAreas={`"nav header"
-                            "nav main"
-                            "nav footer"`}
-            gridTemplateRows={'90px 1fr'}
-            gridTemplateColumns={'300px 1fr'}
-            // color='#464E56'
-            // fontWeight='bold'
-            >
-            <GridItem style={{textAlign:"end"}} mr={4} mt={4} pl='2' area={'header'}>
+        <Stack spacing={4}>
+            <Text fontSize='2xl' color={"#464E56"}><b>Summary</b></Text>
+            <Box borderWidth='1px' backgroundColor="white" borderRadius='xl' h={123}>
+            <Flex color='white'>
+                <Center w='25%' h={123}>
+                <Stack spacing={2} textAlign='center'>
+                    <Text fontSize='2xl' color={"#464E56"}><b>{murid}</b></Text>
+                    <Text fontSize='md' color={"#6D7878"}>Murid</Text>
+                </Stack>
+                </Center>
+                <Center w='25%'>
+                <Stack spacing={2} textAlign='center'>
+                    <Text fontSize='2xl' color={"#464E56"}><b>{kegiatan}</b></Text>
+                    <Text fontSize='md' color={"#6D7878"}>Kegiatan</Text>
+                </Stack>
+                </Center>
+                <Center w='25%' h={123}>
+                <Stack spacing={2} textAlign='center'>
+                    <Text fontSize='2xl' color={"#464E56"}><b>{guru}</b></Text>
+                    <Text fontSize='md' color={"#6D7878"}>Guru</Text>
+                </Stack>
+                </Center>
+                <Center w='25%'>
+                <Stack spacing={2} textAlign='center'>
+                    <Text fontSize='2xl' color={"#464E56"}><b>{parents}</b></Text>
+                    <Text fontSize='md' color={"#6D7878"}>Orang Tua</Text>
+                </Stack>
+                </Center>
+            </Flex>
+            </Box>
+            <Flex pt={5}>
+                <Text fontSize='2xl' color={"#464E56"}><b>Today Analytics</b></Text>
+                <Spacer />
                 <Menu>
-                <MenuButton h={51} as={Button} background="white" rightIcon={<ChevronDownIcon />}>
-                <HStack spacing='0'>
-                <Wrap mr={3}>
-                    <WrapItem>
-                        <Avatar size='md' name='Salman Alfarizi' src='' />
-                    </WrapItem>
-                </Wrap>
-                <Text fontSize='lg' color={"#464E56"}>Salman Alfarizi</Text>
-                </HStack>
-                </MenuButton>
-                <MenuList>
-                    <MenuItem>Log Out</MenuItem>
-                </MenuList>
+                    <MenuButton as={Button} background="white" rightIcon={<ChevronDownIcon />}>
+                    <Text fontSize='md' color={"#6867AC"}>Choose Subjects</Text>
+                    </MenuButton>
+                    <MenuList>
+                        <MenuItem>Students</MenuItem>
+                        <MenuItem>Subjects</MenuItem>
+                    </MenuList>
                 </Menu>
-            </GridItem>
-            <GridItem w={300} area={'nav'}>
-            <Center>
-                <Stack spacing={1} mt={10} float='right'>
-                    <img src={background} style={{height:'100px',marginBottom:'80px'}}/>
-                    <Link to='dashboard'><Button justifyContent="flex-start" backgroundColor="#EDECF8" color="#6867AC" w={180} style={{height:'50px'}}><img src={icon_home_active} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Dashboard</b></Text></Button></Link>
-                    <Link to='/murid'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_students} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Murid</b></Text></Button></Link>
-                    <Link to='/kegiatan'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_subjects} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Kegiatan</b></Text></Button></Link>
-                    <Link to='/guru'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_teachers} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Guru</b></Text></Button></Link>
-                    <Link to='/orang-tua'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_parents} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Orang Tua</b></Text></Button></Link>
-                </Stack>
-            </Center>
-            </GridItem>
-            <GridItem pr={4} pb={10} area={'main'}>
-                <Box borderWidth='1px' backgroundColor="#F4F4FB" borderRadius='xl' p={10}>
-                <Stack spacing={4}>
-                    <Text fontSize='xl' color={"#464E56"}><b>Summary</b></Text>
-                    <Box borderWidth='1px' backgroundColor="white" borderRadius='xl' h={123}>
-                    <Flex color='white'>
-                        <Center w='25%' h={123}>
-                        <Stack spacing={2} textAlign='center'>
-                            <Text fontSize='2xl' color={"#464E56"}><b>58</b></Text>
-                            <Text fontSize='md' color={"#6D7878"}>Students</Text>
-                        </Stack>
-                        </Center>
-                        <Center w='25%'>
-                        <Stack spacing={2} textAlign='center'>
-                            <Text fontSize='2xl' color={"#464E56"}><b>58</b></Text>
-                            <Text fontSize='md' color={"#6D7878"}>Subjects</Text>
-                        </Stack>
-                        </Center>
-                        <Center w='25%' h={123}>
-                        <Stack spacing={2} textAlign='center'>
-                            <Text fontSize='2xl' color={"#464E56"}><b>0</b></Text>
-                            <Text fontSize='md' color={"#6D7878"}>xxxx</Text>
-                        </Stack>
-                        </Center>
-                        <Center w='25%'>
-                        <Stack spacing={2} textAlign='center'>
-                            <Text fontSize='2xl' color={"#464E56"}><b>0</b></Text>
-                            <Text fontSize='md' color={"#6D7878"}>xxxx</Text>
-                        </Stack>
-                        </Center>
-                    </Flex>
-                    </Box>
-                    <Flex pt={5}>
-                        <Text fontSize='xl' color={"#464E56"}><b>Today Analytics</b></Text>
-                        <Spacer />
-                        <Menu>
-                            <MenuButton as={Button} background="white" rightIcon={<ChevronDownIcon />}>
-                            <Text fontSize='md' color={"#6867AC"}>Choose Subjects</Text>
-                            </MenuButton>
-                            <MenuList>
-                                <MenuItem>Students</MenuItem>
-                                <MenuItem>Subjects</MenuItem>
-                            </MenuList>
-                        </Menu>
-                    </Flex>
-                    <Box borderWidth='1px' backgroundColor="white" borderRadius='xl' h={490}>
-                    </Box>
-                </Stack>
-                </Box>
-            </GridItem>
-        </Grid>
+            </Flex>
+            <Box borderWidth='1px' backgroundColor="white" borderRadius='xl' h={490}>
+                <Bubble options={options} data={data} />
+            </Box>
+        </Stack>
     )
 }
