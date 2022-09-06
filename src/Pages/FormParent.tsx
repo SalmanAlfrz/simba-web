@@ -1,114 +1,107 @@
-import React from "react";
-import background from "../Images/logo.svg";
-import icon_home from "../Images/icon_home.svg";
-import icon_students from "../Images/icon_students.svg";
-import icon_subjects from "../Images/icon_subjects.svg";
-import icon_teachers from "../Images/icon_teachers.svg";
-import icon_parents_active from "../Images/icon_parents_active.svg";
+import React, { useEffect, useState } from 'react'
 import {
-    Grid,
-    GridItem,
-    Box,
     Stack,
     Button,
-    HStack,
-    Text,
-    Center,Avatar, WrapItem, Wrap, Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    Flex,
-    Spacer,Input, Select, Textarea
-  } from '@chakra-ui/react';
-  import { Link} from 'react-router-dom';
-import { ChevronDownIcon } from '@chakra-ui/icons'
-import { AddIcon } from '@chakra-ui/icons'
-interface FormParentProps{}
-export default function FormParent(){
+    Text, Input, Select, HStack, Spacer
+} from '@chakra-ui/react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ChevronLeftIcon } from '@chakra-ui/icons'
+import axios from "../Api/axios";
+import { getCookie } from 'typescript-cookie'
+interface FormParentProps { }
+export default function FormParent() {
+    const token = getCookie('token')
+    const navigate = useNavigate()
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [phone_number, setPhone_number] = useState("")
+    const [student_id, setStudent_id] = useState("")
+    const [murid, setMurid] = useState([{
+        id:0,
+        name:'',
+        birthDate:0
+    }])
+    useEffect(() => {
+        axios.get('students', {
+            headers: {
+              'x-access-token': 'api-key',
+              'Authorization': `token ${token}`
+            }
+          })
+          .then((res) => {
+              let data = res.data.data
+              setMurid(data)
+          })
+    }, [])
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault()
+        axios.post('parents', {
+            name: name,
+            email: email,
+            password: password,
+            phone_number: phone_number,
+            student_id: Number(student_id)
+        }, {
+            headers: {
+                'x-access-token': 'api-key',
+                'Authorization': `token ${token}`
+            }
+        })
+        alert('Data berhasil ditambahkan')
+        navigate('/orang-tua')
+    }
     return (
-        <Grid
-            templateAreas={`"nav header"
-                            "nav main"
-                            "nav footer"`}
-            gridTemplateRows={'90px 1fr'}
-            gridTemplateColumns={'300px 1fr'}
-            // color='#464E56'
-            // fontWeight='bold'
-            >
-            <GridItem style={{textAlign:"end"}} mr={4} mt={4} pl='2' area={'header'}>
-            <Menu>
-                <MenuButton h={51} as={Button} background="white" rightIcon={<ChevronDownIcon />}>
-                <HStack spacing='0'>
-                <Wrap mr={3}>
-                    <WrapItem>
-                        <Avatar size='md' name='Salman Alfarizi' src='' />
-                    </WrapItem>
-                </Wrap>
-                <Text fontSize='lg' color={"#464E56"}>Salman Alfarizi</Text>
-                </HStack>
-                </MenuButton>
-                <MenuList>
-                    <MenuItem>Log Out</MenuItem>
-                </MenuList>
-                </Menu>
-            </GridItem>
-            <GridItem w={300} area={'nav'}>
-            <Center>
-                <Stack spacing={1} mt={10}>
-                    <img src={background} style={{height:'100px',marginBottom:'80px'}}/>
-                    <Link to='/dashboard'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_home} width={21} height={21} alt="" /><Text fontSize='lg' pl={3}><b>Dashboard</b></Text></Button></Link>
-                    <Link to='/murid'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_students} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Murid</b></Text></Button></Link>
-                    <Link to='/kegiatan'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_subjects} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Kegiatan</b></Text></Button></Link>
-                    <Link to='/guru'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_teachers} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Guru</b></Text></Button></Link>
-                    <Link to='/orang-tua'><Button justifyContent="flex-start" backgroundColor="#EDECF8" color="#6867AC" w={180} style={{height:'50px'}}><img src={icon_parents_active} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Orang Tua</b></Text></Button></Link>
-                </Stack>
-            </Center>
-            </GridItem>
-            <GridItem pr={4} pb={10} area={'main'}>
-                <Box borderWidth='1px' backgroundColor="#F4F4FB" borderRadius='xl' p={10}>
-                <Center>
-                <Stack spacing={5} mt={8}>
-                    <Text fontSize='2xl' mb="-25px" color={"#464E56"}><b>Form Tambah Orang Tua</b></Text>
-                    <Text fontSize='lg' pt={10}>Nama Orang Tua</Text>
-                    <Input h={67} w={1080} backgroundColor={"#ffffff"} color={"#6D7878"}
-                        // value={value}
-                        // onChange={handleChange}
-                        placeholder='Masukkan nama orang tua...'
-                        size='lg'
-                        style={{marginBottom:'10px'}}/>
-                    <Text fontSize='lg' pt={5}>Nama Anak</Text>
-                    <Select placeholder='Pilih anak' h={67} w={1080} backgroundColor={"#ffffff"} color={"#6D7878"}>
-                        <option value='option1'>Semester 1</option>
-                        <option value='option2'>Semester 2</option>
-                    </Select>
-                    <Text fontSize='lg' pt={5}>Nomor Telepon</Text>
-                    <Input h={67} w={1080} backgroundColor={"#ffffff"} color={"#6D7878"}
-                        // value={value}
-                        // onChange={handleChange}
-                        placeholder='Masukkan nomor telepon...'
-                        size='lg'
-                        style={{marginBottom:'10px'}}/>
-                    <Text fontSize='2xl' mb="-25px" mt={5} color={"#464E56"}><b>Credential</b></Text>
-                    <Text fontSize='lg' pt={5}>Email</Text>
-                    <Input h={67} w={1080} backgroundColor={"#ffffff"} color={"#6D7878"}
-                        // value={value}
-                        // onChange={handleChange}
-                        placeholder='Masukkan email...'
-                        size='lg'
-                        style={{marginBottom:'10px'}}/>
-                    <Text fontSize='lg' pt={5}>Kata Sandi</Text>
-                    <Input h={67} w={1080} mb={10} backgroundColor={"#ffffff"} color={"#6D7878"}
-                        // value={value}
-                        // onChange={handleChange}
-                        placeholder='Masukkan kata sandi...'
-                        size='lg'
-                        style={{marginBottom:'10px'}}/>
-                        
-                        <Button marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" height={67} width={1080}>Simpan</Button>
-                </Stack>
-                </Center>
-                </Box>
-            </GridItem>
-        </Grid>
+        <Stack spacing={5}>
+            <HStack>
+                <Text fontSize='2xl' color={"#464E56"}><b>Form Tambah Orang Tua</b></Text>
+                <Spacer />
+                <Link to="/orang-tua"><ChevronLeftIcon w={7} h={7} /></Link><Link to="/orang-tua"><Text fontSize='lg' color={"#464E56"}>Kembali Ke Halaman Sebelumnya</Text></Link>
+            </HStack>
+            <br />
+            <form onSubmit={handleSubmit} >
+            <Text fontSize='lg'>Nama Orang Tua</Text>
+            <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                placeholder='Masukkan nama orang tua...'
+                size='lg'
+                style={{ marginBottom: '10px' }} />
+            <Text fontSize='lg'>Nama Anak</Text>
+            <Select placeholder='Pilih anak' h={67} backgroundColor={"#ffffff"} color={"#6D7878"} 
+                onChange={(e) => setStudent_id(e.target.value)}>
+                {
+                    murid.map((data,index) => {
+                        return(<option key={index} value={data.id}>{data.name}</option>)
+                    })
+                }
+            </Select>
+            <Text fontSize='lg'>Nomor Telepon</Text>
+            <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
+                onChange={(e) => setPhone_number(e.target.value)}
+                value={phone_number}
+                placeholder='Masukkan nomor telepon...'
+                size='lg'
+                style={{ marginBottom: '10px' }} />
+            <br />
+            <Text fontSize='2xl' mb="-25px" mt={5} color={"#464E56"}><b>Credential</b></Text>
+            <Text fontSize='lg' >Email</Text>
+            <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                placeholder='Masukkan email...'
+                size='lg'
+                style={{ marginBottom: '10px' }} />
+            <Text fontSize='lg' >Kata Sandi</Text>
+            <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                placeholder='Masukkan kata sandi...'
+                size='lg'
+                style={{ marginBottom: '10px' }} />
+            <br />
+            <Button type="submit" marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" height={67}>Simpan</Button>
+            </form>
+        </Stack>
     )
 }

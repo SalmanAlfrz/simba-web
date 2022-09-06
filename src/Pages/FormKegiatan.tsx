@@ -1,99 +1,91 @@
-import React from "react";
-import background from "../Images/logo.svg";
-import icon_home from "../Images/icon_home.svg";
-import icon_students from "../Images/icon_students.svg";
-import icon_subjects_active from "../Images/icon_subjects_active.svg";
-import icon_teachers from "../Images/icon_teachers.svg";
-import icon_parents from "../Images/icon_parents.svg";
+import React, { useEffect, useState } from 'react'
 import {
-    Grid,
-    GridItem,
-    Box,
     Stack,
     Button,
     HStack,
-    Text,
-    Center,Avatar, WrapItem, Wrap, Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    Flex,
-    Spacer,Input, Select, Textarea
-  } from '@chakra-ui/react';
-  import { Link} from 'react-router-dom';
-import { ChevronDownIcon } from '@chakra-ui/icons'
+    Text, Spacer, Input, Select, Textarea
+} from '@chakra-ui/react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ChevronLeftIcon } from '@chakra-ui/icons'
+import axios from "../Api/axios";
+import { getCookie } from 'typescript-cookie';
 import { AddIcon } from '@chakra-ui/icons'
-interface FormKegiatanProps{}
-export default function FormKegiatan(){
+interface FormKegiatanProps { }
+export default function FormKegiatan() {
+    const token = getCookie('token')
+    const navigate = useNavigate()
+    const [name, setName] = useState("")
+    const [time, setTime] = useState("")
+    const [semester_id, setSemester_id] = useState("")
+    const [description, setDescription] = useState("")
+    const [semester, setSemester] = useState([{
+        id:0,
+        name:''
+    }])
+    useEffect(() => {
+        // get token
+        axios.get('semesters', {
+            headers: {
+              'x-access-token': 'api-key',
+              'Authorization': `token ${token}`
+            }
+          })
+          .then((res) => {
+              setSemester(res.data.data);
+          })
+    }, [])
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault()
+        axios.post('activities', {
+            name: name,
+            time: time,
+            semester_id: Number(semester_id),
+            description: description
+        }, {
+            headers: {
+                'x-access-token': 'api-key',
+                'Authorization': `token ${token}`
+            }
+        })
+        alert('Data berhasil ditambahkan')
+        navigate('/kegiatan')
+    }
     return (
-        <Grid
-            templateAreas={`"nav header"
-                            "nav main"
-                            "nav footer"`}
-            gridTemplateRows={'90px 1fr'}
-            gridTemplateColumns={'300px 1fr'}
-            // color='#464E56'
-            // fontWeight='bold'
-            >
-            <GridItem style={{textAlign:"end"}} mr={4} mt={4} pl='2' area={'header'}>
-            <Menu>
-                <MenuButton h={51} as={Button} background="white" rightIcon={<ChevronDownIcon />}>
-                <HStack spacing='0'>
-                <Wrap mr={3}>
-                    <WrapItem>
-                        <Avatar size='md' name='Salman Alfarizi' src='' />
-                    </WrapItem>
-                </Wrap>
-                <Text fontSize='lg' color={"#464E56"}>Salman Alfarizi</Text>
-                </HStack>
-                </MenuButton>
-                <MenuList>
-                    <MenuItem>Log Out</MenuItem>
-                </MenuList>
-                </Menu>
-            </GridItem>
-            <GridItem w={300} area={'nav'}>
-            <Center>
-                <Stack spacing={1} mt={10}>
-                    <img src={background} style={{height:'100px',marginBottom:'80px'}}/>
-                    <Link to='/dashboard'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_home} width={21} height={21} alt="" /><Text fontSize='lg' pl={3}><b>Dashboard</b></Text></Button></Link>
-                    <Link to='/murid'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_students} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Murid</b></Text></Button></Link>
-                    <Link to='/kegiatan'><Button justifyContent="flex-start" backgroundColor="#EDECF8" color="#6867AC" w={180} style={{height:'50px'}}><img src={icon_subjects_active} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Kegiatan</b></Text></Button></Link>
-                    <Link to='/guru'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_teachers} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Guru</b></Text></Button></Link>
-                    <Link to='/orang-tua'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_parents} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Orang Tua</b></Text></Button></Link>
-                </Stack>
-            </Center>
-            </GridItem>
-            <GridItem pr={4} pb={10} area={'main'}>
-                <Box borderWidth='1px' backgroundColor="#F4F4FB" borderRadius='xl' p={10}>
-                <Center>
-                <Stack spacing={5} mt={8}>
-                    <Text fontSize='2xl' mb="-25px" color={"#464E56"}><b>Form Tambah Kegiatan Montessori</b></Text>
-                    <Text fontSize='lg' pt={10}>Semester</Text>
-                    <Select placeholder='Pilih Semester' h={67} w={1080} backgroundColor={"#ffffff"} color={"#6D7878"}>
-                        <option value='option1'>Semester 1</option>
-                        <option value='option2'>Semester 2</option>
-                    </Select>
-                    <Text fontSize='lg' pt={5}>Kegiatan Montessori</Text>
-                    <Input h={67} w={1080} backgroundColor={"#ffffff"} color={"#6D7878"}
-                        // value={value}
-                        // onChange={handleChange}
-                        placeholder='Masukkan Kegiatan Montessori...'
-                        size='lg'
-                        style={{marginBottom:'10px'}}/>
-                    <Text fontSize='lg' pt={5}>Deskripsi</Text>
-                    <Textarea placeholder='Masukan deskripsi nilai kegiatan...' backgroundColor={"#ffffff"} color={"#6D7878"} h={150}/>
-                    <Text fontSize='lg' pt={5}>Tanggal Kegiatan Montessori</Text>
-                    <Input  h={67} w={1080} backgroundColor={"#ffffff"} color={"#6D7878"}
-                        placeholder="Masukkan Kegiatan Montessori"
-                        size="md"
-                        type="datetime-local"
-                        />
-                        <Button marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" height={67} width={1080}>Simpan</Button>
-                </Stack>
-                </Center>
-                </Box>
-            </GridItem>
-        </Grid>
+        <Stack spacing={5}>
+            <HStack>
+                <Text fontSize='2xl' color={"#464E56"}><b>Form Tambah Kegiatan Montessori</b></Text>
+                <Spacer />
+                <Link to="/kegiatan"><ChevronLeftIcon w={7} h={7} /></Link><Link to="/kegiatan"><Text fontSize='lg' color={"#464E56"}>Kembali Ke Halaman Sebelumnya</Text></Link>
+            </HStack>
+            <br />
+            <form onSubmit={handleSubmit} >
+            <Text fontSize='lg'>Semester</Text>
+            <Select placeholder='Pilih Semester' h={67} backgroundColor={"#ffffff"} color={"#6D7878"} 
+                onChange={(e) => setSemester_id(e.target.value)}>
+                {semester.map((data,index) => {
+                    return(<option value={data.id} key={index}>{data.name}</option>)
+                })}
+            </Select>
+            <Text fontSize='lg'>Kegiatan Montessori</Text>
+            <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                placeholder='Masukkan Kegiatan Montessori...'
+                size='lg'
+                style={{ marginBottom: '10px' }} />
+            <Text fontSize='lg'>Deskripsi</Text>
+            <Textarea value={description} placeholder='Masukan deskripsi nilai kegiatan...' backgroundColor={"#ffffff"} color={"#6D7878"} h={150} onChange={(e) => setDescription(e.target.value)}/>
+            <Text fontSize='lg'>Tanggal Kegiatan Montessori</Text>
+            <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
+                placeholder="Masukkan Kegiatan Montessori"
+                size="md"
+                type="date"
+                onChange={(e) => setTime(e.target.value)}
+                value={time}
+            />
+            <br />
+            <Button type="submit" marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" height={67} >Simpan</Button>
+            </form>
+        </Stack>
     )
 }

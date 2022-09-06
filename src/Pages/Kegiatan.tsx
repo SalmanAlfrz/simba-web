@@ -41,12 +41,11 @@ export default function Kegiatan(){
                 <Button backgroundColor="#6867AC" h={54} w={150}>Cari Kegiatan</Button>
             </Center>
         </Flex>
-        
-        <Box borderWidth='1px' backgroundColor="white" borderRadius='xl' h={490} w={1080}>
+        <Box borderWidth='1px' backgroundColor="white" borderRadius='xl'>
             <Flex p={5}>
                 <Text fontSize='xl' color={"#464E56"}><b>{kegiatan.length} Kegiatan Terdaftar</b></Text>
                 <Spacer />
-                <Link to='/add-kegiatan'><Button backgroundColor="white" color={'black'} h={33} variant='outline'>Tambah Kegiatan <AddIcon ml={2} w={3} mt={0.5}/></Button></Link>
+                <Link to='/kegiatan/add'><Button backgroundColor="white" color={'black'} variant='outline'>Tambah Kegiatan <AddIcon ml={2} w={3} mt={0.5}/></Button></Link>
             </Flex>
             <TableContainer>
                 <Table variant='striped'>
@@ -57,7 +56,7 @@ export default function Kegiatan(){
                         <Th>Kegiatan Montessori</Th>
                         <Th>Deskripsi</Th>
                         <Th>Tanggal Kegiatan</Th>
-                        <Th>Aksi</Th>
+                        {/* <Th>Aksi</Th> */}
                     </Tr>
                     </Thead>
                     <Tbody>
@@ -70,7 +69,7 @@ export default function Kegiatan(){
                                     <Td>{data.name}</Td>
                                     <Td>{data.description}</Td>
                                     <Td >{data.time}</Td>
-                                <Td></Td>
+                                {/* <Td></Td> */}
                             </Tr>
                             )
                         })   

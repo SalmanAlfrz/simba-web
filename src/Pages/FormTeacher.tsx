@@ -1,129 +1,103 @@
-import React from "react";
-import background from "../Images/logo.svg";
-import icon_home from "../Images/icon_home.svg";
-import icon_students from "../Images/icon_students.svg";
-import icon_subjects from "../Images/icon_subjects.svg";
-import icon_teachers_active from "../Images/icon_teachers_active.svg";
-import icon_parents from "../Images/icon_parents.svg";
+import React, { useEffect, useState } from 'react'
 import {
-    Grid,
-    GridItem,
-    Box,
     Stack,
     Button,
-    HStack,
-    Text,
-    Center,Avatar, WrapItem, Wrap, Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    Flex,
-    Spacer,Input, Select, Textarea
+    Text,Input, HStack, Spacer
   } from '@chakra-ui/react';
-  import { Link} from 'react-router-dom';
-import { ChevronDownIcon } from '@chakra-ui/icons'
-import { AddIcon } from '@chakra-ui/icons'
+  import { Link, useNavigate } from 'react-router-dom';
+  import { ChevronLeftIcon } from '@chakra-ui/icons'
+  import axios from "../Api/axios";
+  import { getCookie } from 'typescript-cookie'
 interface FormTeacherProps{}
 export default function FormTeacher(){
-    return (
-        <Grid
-            templateAreas={`"nav header"
-                            "nav main"
-                            "nav footer"`}
-            gridTemplateRows={'90px 1fr'}
-            gridTemplateColumns={'300px 1fr'}
-            // color='#464E56'
-            // fontWeight='bold'
-            >
-            <GridItem style={{textAlign:"end"}} mr={4} mt={4} pl='2' area={'header'}>
-            <Menu>
-                <MenuButton h={51} as={Button} background="white" rightIcon={<ChevronDownIcon />}>
-                <HStack spacing='0'>
-                <Wrap mr={3}>
-                    <WrapItem>
-                        <Avatar size='md' name='Salman Alfarizi' src='' />
-                    </WrapItem>
-                </Wrap>
-                <Text fontSize='lg' color={"#464E56"}>Salman Alfarizi</Text>
-                </HStack>
-                </MenuButton>
-                <MenuList>
-                    <MenuItem>Log Out</MenuItem>
-                </MenuList>
-                </Menu>
-            </GridItem>
-            <GridItem w={300} area={'nav'}>
-            <Center>
-                <Stack spacing={1} mt={10}>
-                    <img src={background} style={{height:'100px',marginBottom:'80px'}}/>
-                    <Link to='/dashboard'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_home} width={21} height={21} alt="" /><Text fontSize='lg' pl={3}><b>Dashboard</b></Text></Button></Link>
-                    <Link to='/murid'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_students} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Murid</b></Text></Button></Link>
-                    <Link to='/kegiatan'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_subjects} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Kegiatan</b></Text></Button></Link>
-                    <Link to='/guru'><Button justifyContent="flex-start" backgroundColor="#EDECF8" color="#6867AC" w={180} style={{height:'50px'}}><img src={icon_teachers_active} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Guru</b></Text></Button></Link>
-                    <Link to='/orang-tua'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_parents} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Orang Tua</b></Text></Button></Link>
-                </Stack>
-            </Center>
-            </GridItem>
-            <GridItem pr={4} pb={10} area={'main'}>
-                <Box borderWidth='1px' backgroundColor="#F4F4FB" borderRadius='xl' p={10}>
-                <Center>
-                <Stack spacing={5} mt={8}>
-                    <Text fontSize='2xl' mb="-25px" color={"#464E56"}><b>Form Tambah Guru</b></Text>
-                    <Text fontSize='lg' pt={10}>NIP</Text>
-                    <Input h={67} w={1080} backgroundColor={"#ffffff"} color={"#6D7878"}
-                        // value={value}
-                        // onChange={handleChange}
-                        placeholder='Masukkan NIP...'
-                        size='lg'
-                        style={{marginBottom:'10px'}}/>
-                    <Text fontSize='lg' pt={5}>Nama Guru</Text>
-                    <Input h={67} w={1080} backgroundColor={"#ffffff"} color={"#6D7878"}
-                        // value={value}
-                        // onChange={handleChange}
-                        placeholder='Masukkan Nama Guru...'
-                        size='lg'
-                        style={{marginBottom:'10px'}}/>
-                    <Text fontSize='lg' pt={5}>Tanggal Lahir</Text>
-                    <Input  h={67} w={1080} backgroundColor={"#ffffff"} color={"#6D7878"}
-                        placeholder="Masukkan tanggal lahir..."
-                        size="md"
-                        type="datetime-local"
-                        />
-                    <Text fontSize='lg' pt={5}>Nomor Telepon</Text>
-                    <Input h={67} w={1080} backgroundColor={"#ffffff"} color={"#6D7878"}
-                        // value={value}
-                        // onChange={handleChange}
-                        placeholder='Masukkan nomor telepon...'
-                        size='lg'
-                        style={{marginBottom:'10px'}}/>
-                    <Text fontSize='lg' pt={5}>Hari Mengajar</Text>
-                    <Input h={67} w={1080} backgroundColor={"#ffffff"} color={"#6D7878"}
-                        // value={value}
-                        // onChange={handleChange}
-                        placeholder='Masukkan hari mengajar...'
-                        size='lg'
-                        style={{marginBottom:'10px'}}/>
-                    <Text fontSize='2xl' mb="-25px" mt={5} color={"#464E56"}><b>Credential</b></Text>
-                    <Text fontSize='lg' pt={5}>Email</Text>
-                    <Input h={67} w={1080} backgroundColor={"#ffffff"} color={"#6D7878"}
-                        // value={value}
-                        // onChange={handleChange}
-                        placeholder='Masukkan email...'
-                        size='lg'
-                        style={{marginBottom:'10px'}}/>
-                    <Text fontSize='lg' pt={5}>Kata Sandi</Text>
-                    <Input h={67} w={1080} mb={10} backgroundColor={"#ffffff"} color={"#6D7878"}
-                        // value={value}
-                        // onChange={handleChange}
-                        placeholder='Masukkan kata sandi...'
-                        size='lg'
-                        style={{marginBottom:'10px'}}/>
-                        
-                        <Button marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" height={67} width={1080}>Simpan</Button>
-                </Stack>
-                </Center>
-                </Box>
-            </GridItem>
-        </Grid>
+    const token = getCookie('token')
+    const navigate = useNavigate()
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [phone_number, setPhone_number] = useState("")
+    const [nip, setNip] = useState("")
+    useEffect(() => {
+    }, [])
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault()
+        axios.post('teachers', {
+            name: name,
+            email: email,
+            password: password,
+            phone_number: phone_number,
+            nip: nip
+        }, {
+            headers: {
+                'x-access-token': 'api-key',
+                'Authorization': `token ${token}`
+            }
+        })
+        alert('Data berhasil ditambahkan')
+        navigate('/guru')
+    }
+    return (    
+    <Stack spacing={5}>
+        <HStack>
+            <Text fontSize='2xl' color={"#464E56"}><b>Form Tambah Guru</b></Text>
+            <Spacer/>
+            <Link to="/guru"><ChevronLeftIcon w={7} h={7}/></Link><Link to="/guru"><Text fontSize='lg'color={"#464E56"}>Kembali Ke Halaman Sebelumnya</Text></Link>
+        </HStack>
+        <br />
+        <form onSubmit={handleSubmit} >
+        <Text fontSize='lg'>NIP</Text>
+        <Input h={67}backgroundColor={"#ffffff"} color={"#6D7878"}
+            onChange={(e) => setNip(e.target.value)}
+            value={nip}
+            placeholder='Masukkan NIP...'
+            size='lg'
+            style={{marginBottom:'10px'}}/>
+        <Text fontSize='lg'>Nama Guru</Text>
+        <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            placeholder='Masukkan Nama Guru...'
+            size='lg'
+            style={{marginBottom:'10px'}}/>
+        <Text fontSize='lg' >Tanggal Lahir</Text>
+        <Input  h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
+            placeholder="Masukkan tanggal lahir..."
+            size="md"
+            type="date"
+            />
+        <Text fontSize='lg' >Nomor Telepon</Text>
+        <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
+            onChange={(e) => setPhone_number(e.target.value)}
+            value={phone_number}
+            placeholder='Masukkan nomor telepon...'
+            size='lg'
+            style={{marginBottom:'10px'}}/>
+        <Text fontSize='lg'>Hari Mengajar</Text>
+        <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
+            // value={value}
+            // onChange={handleChange}
+            placeholder='Masukkan hari mengajar...'
+            size='lg'
+            style={{marginBottom:'10px'}}/>
+            <br />
+        <Text fontSize='2xl' mb="-25px" mt={5} color={"#464E56"}><b>Credential</b></Text>
+        <Text fontSize='lg'>Email</Text>
+        <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            placeholder='Masukkan email...'
+            size='lg'
+            style={{marginBottom:'10px'}}/>
+        <Text fontSize='lg'>Kata Sandi</Text>
+        <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            placeholder='Masukkan kata sandi...'
+            size='lg'
+            style={{marginBottom:'10px'}}/>
+        <br />
+        <Button type="submit" marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" height={67}>Simpan</Button>
+        </form>
+    </Stack>
     )
 }
