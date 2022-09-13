@@ -73,8 +73,8 @@ export default function FormGrade() {
                 'Authorization': `token ${token}`
             }
         })
-        // alert('Data berhasil ditambahkan')
-        // navigate('/murid/detail'+id)
+        alert('Data berhasil ditambahkan')
+        navigate('/murid/detail/'+id)
     }
     console.log(id,activity_id,value,description)
     return (
@@ -86,14 +86,14 @@ export default function FormGrade() {
             </HStack>
             <br />
             <form onSubmit={handleSubmit} >
-            <Text fontSize='lg'>Nama</Text>
+            <Text mb={2} fontSize='lg'>Nama</Text>
             <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
                 onChange={(e) => setstudent_id(e.target.value)}
                 value={murid.student.name}
                 placeholder='Masukkan Nama Murid'
                 size='lg'
                 style={{ marginBottom: '10px' }} disabled/>
-            <Text fontSize='lg'>Jenis Kegiatan Montessori</Text>
+            <Text mb={2} mt={5} fontSize='lg'>Jenis Kegiatan Montessori</Text>
             <Select placeholder='Pilih Jenis Kegiatan Montessori' h={67} backgroundColor={"#ffffff"} color={"#6D7878"} onChange={(e) => setactivity_id(e.target.value)}>
                 {
                     kegiatan.map((data,index)=>{
@@ -101,17 +101,17 @@ export default function FormGrade() {
                     })
                 }
             </Select>
-            <Text fontSize='lg'>Nilai</Text>
+            <Text mb={2} mt={5} fontSize='lg'>Nilai</Text>
             <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
                 onChange={(e) => setvalue(e.target.value)}
                 value={value}
                 placeholder='Masukkan nilai kegiatan...'
                 size='lg'
                 style={{ marginBottom: '10px' }} />
-            <Text fontSize='lg'>Deskripsi</Text>
+            <Text mb={2} mt={5} fontSize='lg'>Deskripsi</Text>
             <Textarea value={description} placeholder='Masukan deskripsi nilai kegiatan...' backgroundColor={"#ffffff"} color={"#6D7878"} h={150} onChange={(e) => setvdescription(e.target.value)}/>
             <br />
-            <Button type="submit" marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" height={67}>Simpan</Button>
+            <Button type="submit" marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" w='100%' height={67}>Simpan</Button>
             </form>
         </Stack>
     )

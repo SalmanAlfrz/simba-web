@@ -45,34 +45,30 @@ export default function FormTeacher(){
         </HStack>
         <br />
         <form onSubmit={handleSubmit} >
-        <Text fontSize='lg'>NIP</Text>
+        <Text mb={2} fontSize='lg'>NIP</Text>
         <Input h={67}backgroundColor={"#ffffff"} color={"#6D7878"}
             onChange={(e) => setNip(e.target.value)}
             value={nip}
             placeholder='Masukkan NIP...'
-            size='lg'
-            style={{marginBottom:'10px'}}/>
-        <Text fontSize='lg'>Nama Guru</Text>
+            size='lg'/>
+        <Text mb={2} mt={5} fontSize='lg'>Nama Guru</Text>
         <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
             onChange={(e) => setName(e.target.value)}
             value={name}
             placeholder='Masukkan Nama Guru...'
-            size='lg'
-            style={{marginBottom:'10px'}}/>
-        <Text fontSize='lg' >Tanggal Lahir</Text>
+            size='lg'/>
+        <Text mb={2} mt={5} fontSize='lg' >Tanggal Lahir</Text>
         <Input  h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
             placeholder="Masukkan tanggal lahir..."
             size="md"
-            type="date"
-            />
-        <Text fontSize='lg' >Nomor Telepon</Text>
+            type="date"/>
+        <Text mb={2} mt={5} fontSize='lg' >Nomor Telepon</Text>
         <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
             onChange={(e) => setPhone_number(e.target.value)}
             value={phone_number}
             placeholder='Masukkan nomor telepon...'
-            size='lg'
-            style={{marginBottom:'10px'}}/>
-        <Text fontSize='lg'>Hari Mengajar</Text>
+            size='lg'/>
+        <Text mb={2} mt={5} fontSize='lg'>Hari Mengajar</Text>
         <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
             // value={value}
             // onChange={handleChange}
@@ -80,23 +76,21 @@ export default function FormTeacher(){
             size='lg'
             style={{marginBottom:'10px'}}/>
             <br />
-        <Text fontSize='2xl' mb="-25px" mt={5} color={"#464E56"}><b>Credential</b></Text>
-        <Text fontSize='lg'>Email</Text>
+        <Text fontSize='2xl'mb={2} mt={5} color={"#464E56"}><b>Credential</b></Text>
+        <Text mb={2} mt={5} fontSize='lg'>Email</Text>
         <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             placeholder='Masukkan email...'
-            size='lg'
-            style={{marginBottom:'10px'}}/>
-        <Text fontSize='lg'>Kata Sandi</Text>
+            size='lg'/>
+        <Text mb={2} mt={5} fontSize='lg'>Kata Sandi</Text>
         <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             placeholder='Masukkan kata sandi...'
-            size='lg'
-            style={{marginBottom:'10px'}}/>
+            size='lg'/>
         <br />
-        <Button type="submit" marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" height={67}>Simpan</Button>
+        <Button type="submit" marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" w='100%' height={67}>Simpan</Button>
         </form>
     </Stack>
     )

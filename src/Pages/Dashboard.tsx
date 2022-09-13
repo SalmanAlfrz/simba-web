@@ -9,57 +9,165 @@ declare function require(moduleName: string): any;
 var Plotly = require('plotly.js/lib/index-basic.js');
 var input = [
   {
-    kategori: "baca",
-    ekspresi: "neutral",
-    count: 20
-
-  },
-  {
-    kategori: "baca",
-    ekspresi: "negative",
+    kategori: "Membaca",
+    ekspresi: "Angry",
     count: 10
 
   },
   {
-    kategori: "baca",
-    ekspresi: "positif",
-    count: 70
+    kategori: "Membaca",
+    ekspresi: "Disgust",
+    count: 0
 
   },
   {
-    kategori: "menulis",
-    ekspresi: "neutral",
-    count: 20
+    kategori: "Membaca",
+    ekspresi: "Fear",
+    count: 10
 
   },
   {
-    kategori: "menulis",
-    ekspresi: "negative",
-    count: 15
-
-  },
-  {
-    kategori: "menulis",
-    ekspresi: "positif",
+    kategori: "Membaca",
+    ekspresi: "Happy",
     count: 40
+
   },
   {
-    kategori: "menggambar",
-    ekspresi: "neutral",
+    kategori: "Membaca",
+    ekspresi: "Sad",
+    count: 10
+
+  },
+  {
+    kategori: "Membaca",
+    ekspresi: "Surprise",
+    count: 20
+  },
+  {
+    kategori: "Membaca",
+    ekspresi: "Neutral",
+    count: 60
+  },
+  {
+    kategori: "Menulis",
+    ekspresi: "Angry",
+    count: 0
+
+  },
+  {
+    kategori: "Menulis",
+    ekspresi: "Disgust",
+    count: 0
+
+  },
+  {
+    kategori: "Menulis",
+    ekspresi: "Fear",
+    count: 0
+
+  },
+  {
+    kategori: "Menulis",
+    ekspresi: "Happy",
     count: 30
 
   },
   {
-    kategori: "menggambar",
-    ekspresi: "negative",
+    kategori: "Menulis",
+    ekspresi: "Sad",
+    count: 20
+
+  },
+  {
+    kategori: "Menulis",
+    ekspresi: "Surprise",
+    count: 40
+  },
+  {
+    kategori: "Menulis",
+    ekspresi: "Neutral",
+    count: 60
+  },
+  {
+    kategori: "Menggambar",
+    ekspresi: "Angry",
     count: 10
 
   },
   {
-    kategori: "menggambar",
-    ekspresi: "positif",
+    kategori: "Menggambar",
+    ekspresi: "Disgust",
+    count: 0
+
+  },
+  {
+    kategori: "Menggambar",
+    ekspresi: "Fear",
+    count: 0
+
+  },
+  {
+    kategori: "Menggambar",
+    ekspresi: "Happy",
+    count: 70
+
+  },
+  {
+    kategori: "Menggambar",
+    ekspresi: "Sad",
+    count: 10
+
+  },
+  {
+    kategori: "Menggambar",
+    ekspresi: "Surprise",
+    count: 20
+  },
+  {
+    kategori: "Menggambar",
+    ekspresi: "Neutral",
     count: 50
   },
+  {
+    kategori: "Berhitung",
+    ekspresi: "Angry",
+    count: 10
+
+  },
+  {
+    kategori: "Berhitung",
+    ekspresi: "Disgust",
+    count: 0
+
+  },
+  {
+    kategori: "Berhitung",
+    ekspresi: "Fear",
+    count: 20
+
+  },
+  {
+    kategori: "Berhitung",
+    ekspresi: "Happy",
+    count: 30
+
+  },
+  {
+    kategori: "Berhitung",
+    ekspresi: "Sad",
+    count: 40
+
+  },
+  {
+    kategori: "Berhitung",
+    ekspresi: "Surprise",
+    count: 20
+  },
+  {
+    kategori: "Berhitung",
+    ekspresi: "Neutral",
+    count: 30
+  }
 ]
 let kategoris: string[] = [];
 let ekspresis: string[]=[];

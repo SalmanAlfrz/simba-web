@@ -55,24 +55,30 @@ export default function Students(){
                 {
                     murid.map((data,index)=>{
                         birthNumber = +Moment(data.birthDate).format('yyyy')
-                        return(
-                            <Box key={index} borderWidth='1px' backgroundColor="white" borderRadius='xl' h={358} w={290}>
-                                <Stack spacing={2} mt={10}>
-                                    <Center>
-                                        <Avatar size='2xl' name={data.name} src='' />
-                                    </Center>
-                                    <Center pt={5}>
-                                        <Text fontSize='lg' color={"#464E56"}><b>{data.name}</b></Text>
-                                    </Center>
-                                    <Center>
-                                        <Text fontSize='lg' color={"#464E56"}>{nowNumber - birthNumber} Tahun</Text>
-                                    </Center>
-                                    <Center>
-                                        <Link to={'/murid/detail/'+data.id}><Button backgroundColor="#6867AC" color={'white'} h={54} w={150}>Details</Button></Link>
-                                    </Center>
-                                </Stack>
-                            </Box>
-                        )
+                        if(!data)
+                        {
+                            
+                        }
+                        else {
+                            return(
+                                <Box key={index} borderWidth='1px' backgroundColor="white" borderRadius='xl' h={358} w={290}>
+                                    <Stack spacing={2} mt={10}>
+                                        <Center>
+                                            <Avatar size='2xl' name={data.name} src='' />
+                                        </Center>
+                                        <Center pt={5}>
+                                            <Text fontSize='lg' color={"#464E56"}><b>{data.name}</b></Text>
+                                        </Center>
+                                        <Center>
+                                            <Text fontSize='lg' color={"#464E56"}>{nowNumber - birthNumber} Tahun</Text>
+                                        </Center>
+                                        <Center>
+                                            <Link to={'/murid/detail/'+data.id}><Button backgroundColor="#6867AC" color={'white'} h={54} w={150}>Details</Button></Link>
+                                        </Center>
+                                    </Stack>
+                                </Box>
+                            )
+                        }
                     })
                 }
             </Grid>

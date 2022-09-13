@@ -42,22 +42,21 @@ export default function FormStudent(){
         </HStack>
         <br />
         <form onSubmit={handleSubmit} >
-        <Text fontSize='lg'>Nama</Text>
+        <Text mb={2} fontSize='lg'>Nama</Text>
         <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
             // value={value}
             onChange={(e) => setName(e.target.value)}
             value={name}
             placeholder='Masukkan nama murid'
-            size='lg'
-            style={{marginBottom:'10px'}}/>
-        <Text fontSize='lg'>Tempat Lahir</Text>
+            size='lg'/>
+        <Text mb={2} mt={5} fontSize='lg'>Tempat Lahir</Text>
         <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
             // value={value}
             // onChange={handleChange}
             placeholder='Masukkan tempat lahir murid'
             size='lg'
             style={{marginBottom:'10px'}}/>
-        <Text fontSize='lg'>Tanggal Lahir</Text>
+        <Text mb={2} mt={5} fontSize='lg'>Tanggal Lahir</Text>
         <Input  h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
             placeholder="Masukkan tanggal lahir murid"
             size="md"
@@ -65,20 +64,18 @@ export default function FormStudent(){
             onChange={(e) => setbirthDate(e.target.value)}
             value={birthDate}
             />
-        <Text fontSize='lg'>Alamat</Text>
+        <Text mb={2} mt={5} fontSize='lg'>Alamat</Text>
         <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
             // value={value}
             // onChange={handleChange}
             placeholder='Masukkan alamat murid'
-            size='lg'
-            style={{marginBottom:'10px'}}/>
-        <Text fontSize='lg'>Jenis Kelamin</Text>
+            size='lg'/>
+        <Text mb={2} mt={5} fontSize='lg'>Jenis Kelamin</Text>
         <Select placeholder='Pilih jenis kelamin' h={67} backgroundColor={"#ffffff"} color={"#6D7878"}>
             <option value='Laki-laki'>Laki-laki</option>
             <option value='Perempuan'>Perempuan</option>
         </Select>
-        <br />
-        <Button type="submit" marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" height={67}>Simpan</Button>
+        <Button type="submit" marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" w='100%' height={67}>Simpan</Button>
         </form>
     </Stack>
     )

@@ -59,32 +59,30 @@ export default function FormKegiatan() {
             </HStack>
             <br />
             <form onSubmit={handleSubmit} >
-            <Text fontSize='lg'>Semester</Text>
+            <Text mb={2} fontSize='lg'>Semester</Text>
             <Select placeholder='Pilih Semester' h={67} backgroundColor={"#ffffff"} color={"#6D7878"} 
                 onChange={(e) => setSemester_id(e.target.value)}>
                 {semester.map((data,index) => {
                     return(<option value={data.id} key={index}>{data.name}</option>)
                 })}
             </Select>
-            <Text fontSize='lg'>Kegiatan Montessori</Text>
+            <Text mb={2} mt={5} fontSize='lg'>Kegiatan Montessori</Text>
             <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
                 onChange={(e) => setName(e.target.value)}
                 value={name}
                 placeholder='Masukkan Kegiatan Montessori...'
-                size='lg'
-                style={{ marginBottom: '10px' }} />
-            <Text fontSize='lg'>Deskripsi</Text>
+                size='lg'/>
+            <Text mb={2} mt={5} fontSize='lg'>Deskripsi</Text>
             <Textarea value={description} placeholder='Masukan deskripsi nilai kegiatan...' backgroundColor={"#ffffff"} color={"#6D7878"} h={150} onChange={(e) => setDescription(e.target.value)}/>
-            <Text fontSize='lg'>Tanggal Kegiatan Montessori</Text>
+            <Text mb={2} mt={5} fontSize='lg'>Tanggal Kegiatan Montessori</Text>
             <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
                 placeholder="Masukkan Kegiatan Montessori"
                 size="md"
                 type="date"
                 onChange={(e) => setTime(e.target.value)}
-                value={time}
-            />
+                value={time}/>
             <br />
-            <Button type="submit" marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" height={67} >Simpan</Button>
+            <Button type="submit" marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" w='100%' height={67} >Simpan</Button>
             </form>
         </Stack>
     )

@@ -39,15 +39,14 @@ export default function FormSemester() {
             </HStack>
             <br />
             <form onSubmit={handleSubmit} >
-                <Text fontSize='lg'>Nama Semester</Text>
+                <Text mb={2} fontSize='lg'>Nama Semester</Text>
                 <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
                     onChange={(e) => setName(e.target.value)}
                     value={name}
                     placeholder='Masukkan nama semester...'
-                    size='lg'
-                    style={{ marginBottom: '10px' }} />
+                    size='lg'/>
                 <br />
-                <Button type="submit" marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" height={67}>Simpan</Button>
+                <Button type="submit" marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" w='100%' height={67}>Simpan</Button>
             </form>
         </Stack>
     )

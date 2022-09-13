@@ -60,14 +60,13 @@ export default function FormParent() {
             </HStack>
             <br />
             <form onSubmit={handleSubmit} >
-            <Text fontSize='lg'>Nama Orang Tua</Text>
+            <Text mb={2} fontSize='lg'>Nama Orang Tua</Text>
             <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
                 onChange={(e) => setName(e.target.value)}
                 value={name}
                 placeholder='Masukkan nama orang tua...'
-                size='lg'
-                style={{ marginBottom: '10px' }} />
-            <Text fontSize='lg'>Nama Anak</Text>
+                size='lg'/>
+            <Text mb={2} mt={5} fontSize='lg'>Nama Anak</Text>
             <Select placeholder='Pilih anak' h={67} backgroundColor={"#ffffff"} color={"#6D7878"} 
                 onChange={(e) => setStudent_id(e.target.value)}>
                 {
@@ -76,7 +75,7 @@ export default function FormParent() {
                     })
                 }
             </Select>
-            <Text fontSize='lg'>Nomor Telepon</Text>
+            <Text mb={2} mt={5} fontSize='lg'>Nomor Telepon</Text>
             <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
                 onChange={(e) => setPhone_number(e.target.value)}
                 value={phone_number}
@@ -84,23 +83,21 @@ export default function FormParent() {
                 size='lg'
                 style={{ marginBottom: '10px' }} />
             <br />
-            <Text fontSize='2xl' mb="-25px" mt={5} color={"#464E56"}><b>Credential</b></Text>
-            <Text fontSize='lg' >Email</Text>
+            <Text  fontSize='2xl' mb={2} mt={5} color={"#464E56"}><b>Credential</b></Text>
+            <Text mb={2} mt={5} fontSize='lg' >Email</Text>
             <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 placeholder='Masukkan email...'
-                size='lg'
-                style={{ marginBottom: '10px' }} />
-            <Text fontSize='lg' >Kata Sandi</Text>
+                size='lg'/>
+            <Text mb={2} mt={5} fontSize='lg' >Kata Sandi</Text>
             <Input h={67} backgroundColor={"#ffffff"} color={"#6D7878"}
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 placeholder='Masukkan kata sandi...'
-                size='lg'
-                style={{ marginBottom: '10px' }} />
+                size='lg'/>
             <br />
-            <Button type="submit" marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" height={67}>Simpan</Button>
+            <Button type="submit" marginTop={10} color={"#ffffff"} backgroundColor="#6867AC" w='100%' height={67}>Simpan</Button>
             </form>
         </Stack>
     )

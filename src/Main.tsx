@@ -60,10 +60,7 @@ const Main = () => {
                     "nav main"
                     "nav footer"`}
       gridTemplateRows={'90px 1fr'}
-      gridTemplateColumns={'300px 1fr'}
-    // color='#464E56'
-    // fontWeight='bold'
-    >
+      gridTemplateColumns={'300px 1fr'}>
       <GridItem style={{ textAlign: "end" }} mr={4} mt={4} pl='2' area={'header'}>
         <Menu>
           <MenuButton h={51} as={Button} background="white" rightIcon={<ChevronDownIcon />}>
@@ -92,6 +89,7 @@ const Main = () => {
             <Route path='/murid/add-nilai/*' element={<NavbarStudents />} />
             <Route path='/murid/detail/*' element={<NavbarStudents />} />
             <Route path='/semester' element={<NavbarSemester />} />
+            <Route path='/semester/update/*' element={<NavbarSemester />} />
             <Route path='/semester/add' element={<NavbarSemester />} />
             <Route path='/kegiatan' element={<NavbarKegiatan />} />
             <Route path='/kegiatan/add' element={<NavbarKegiatan />} />
@@ -113,6 +111,7 @@ const Main = () => {
               <Route path='/murid/add-nilai/*' element={<FormGrade/> }/>
               <Route path='/murid/detail/*' element={<DetailStudent />} />
               <Route path='/semester' element={<Semester />} />
+            <Route path='/semester/update/*' element={<FormSemester />} />
               <Route path='/semester/add' element={<FormSemester />} />
               <Route path='/kegiatan' element={<Kegiatan />} />
               <Route path='/kegiatan/add' element={<FormKegiatan />} />

@@ -17,7 +17,7 @@ import {Link} from 'react-router-dom';
 export default function NavbarTeacher(){
     return (
         <Stack spacing={1} mt={10} float='right'>
-            <img src={background} style={{height:'100px',marginBottom:'80px'}}/>
+            <img src={background} style={{height:'100px',marginBottom:'50px'}}/>
             <Link to='/dashboard'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_home} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Dashboard</b></Text></Button></Link>
             <Link to='/murid'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_students} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Murid</b></Text></Button></Link>
             <Link to='/semester'><Button justifyContent="flex-start" backgroundColor="#ffffff" color="#6D7878" w={180} style={{height:'50px'}}><img src={icon_semester} width={21} height={21} alt="" /><Text fontSize='lg' pl={3} ><b>Semester</b></Text></Button></Link>
